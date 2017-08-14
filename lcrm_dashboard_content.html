@@ -1,0 +1,191 @@
+<html><head>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+    <meta>
+<meta><meta></head>
+<body style="word-wrap: break-word;" autocomplete="off">
+
+<div class="header">
+    <h1 id="welcome"></h1>
+    <div class="welcomeh3">
+    <h3>Welcome to Joanna's CRM! This is a sample solution for learning purpose. The solution is designed for the use of a school administration system. </h3>
+
+    <div class="buttons" style="font-family: undefined;">
+        <button id="Home" class="button" type="button" onclick="Home()">Home</button>
+        <button id="MyInfo" class="button" type="button" onclick="MyInfo()">My Info</button>
+        <button id="EnrolledCourses" class="button" type="button" onclick="EnrolledCourses()">Enrolled Courses</button>
+        <button id="RegistrationRequests" class="button" type="button" onclick="RegistrationRequests()">Registration Requests</button>
+        <button id="CourseEvaluation" class="button" type="button" onclick="CourseEvaluation()">Course Evaluation</button>
+    </div>
+    </div>
+</div>
+    <p id="description" style="font-family: undefined"></p>
+
+    <iframe id="iframe" src="" frameborder="0"></iframe>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+	
+	var userid = parent.Xrm.Page.context.getUserId();
+	var username = parent.Xrm.Page.context.getUserName();
+	var orgurl = parent.Xrm.Page.context.getClientUrl();
+	var orgurlshort = orgurl.substring(6);
+	
+$(document).ready(function(){
+    var welcomeuser = "Welcome to Joanna's CRM";
+    var curTime = new Date();
+    var curHr = curTime.getHours();
+	var timegreetings = "Hi"
+    if (curHr < 12) {
+      timegreetings = "Good morning";
+    }
+    else if (curHr < 18) {
+      timegreetings = "Good afternoon";
+    }
+    else {
+      timegreetings = "Good evening";
+    }
+    welcomeuser = timegreetings + ", " + username;
+    document.getElementById("welcome").innerHTML = welcomeuser;
+	var announcement = orgurl + "//WebResources/lcrm_campus_announcement.html";
+	document.getElementById('iframe').src = announcement;
+});
+
+function MyInfo() {
+	document.getElementById("description").innerHTML = "<strong>Account Information</strong><br>Name: " + username +"<br>User ID: "+ userid.slice(1, -1)+ "<br><a href='https:" + orgurlshort + "/main.aspx?etn=systemuser&pagetype=entityrecord&id=%7B" + userid.slice(1, -1) + "%7D' target='_blank'>Manage my account>></a>";
+	document.getElementById('iframe').src = "";
+}
+
+function EnrolledCourses() {
+    document.getElementById("description").innerHTML = "My Enrolled Class";
+	document.getElementById('iframe').src = orgurlshort + "/main.aspx?etn=lcrm_myclass&viewid={009B4F24-3E3D-47E5-B104-10D32EF9FBBC}&pagetype=entitylist&viewtype=1039&navbar=off&cmdbar=false";
+}
+
+function RegistrationRequests() {
+    document.getElementById("description").innerHTML = "<a href='https:" + orgurl + "/main.aspx?etn=lcrm_registration_request&pagetype=entityrecord&navbar=off' target='_blank'>New Registration Request>></a>";
+	document.getElementById('iframe').src = orgurlshort + "/main.aspx?etn=lcrm_registration_request&viewid={B49414CE-5279-E711-8100-C4346BDC3221}&pagetype=entitylist&viewtype=1039&navbar=off&cmdbar=false";
+
+
+}
+
+function CourseEvaluation() {
+    document.getElementById("description").innerHTML = "My Course Evaluation";
+	document.getElementById('iframe').src = orgurlshort + "/main.aspx?etn=lcrm_courseevaluationsurvey&viewid={F0BB2A4C-BEA3-430F-ACFA-0103DE062B97}&pagetype=entitylist&viewtype=1039&navbar=off&cmdbar=false";
+}
+
+function Home() {
+    document.getElementById("description").innerHTML = "";
+	document.getElementById('iframe').src = orgurlshort + "//WebResources/lcrm_campus_announcement.html";
+}
+
+    </script>
+
+    <style>
+        h1 {
+            font-family: Segoe UI Light;
+            font-weight: bold;
+            font-variant: normal;
+            color: white;
+        }
+
+        h3 {
+            font-family: Segoe UI Light;
+            font-variant: normal;
+            color: white;
+        }
+
+        p {
+            font-family: Segoe UI Light !important;
+            font-size: 15px;
+            color: #000000;
+        }
+
+        .button {
+            width: 170px;
+            background-color: #00B7C3;
+            border: 1px solid #00B7C3;
+            color: white;
+            padding: 14px 3px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            /*font-family: Segoe UI Light, Segoe UI, Segoe;*/
+            font-family: Segoe UI;
+            font-weight: lighter;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.2s;
+        }
+
+            .button:hover {
+                background-color: white;
+                color: #00B7C3;
+            }
+
+        iframe {
+            width: 100%;
+            height: 700px;
+        }
+
+        a:link, a:visited {
+            background-color: #FEB818;
+            border: 1px solid #FEB818;
+            color: white;
+            padding: 10px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+
+        a:hover {
+            background-color: white;
+            color: #FEB818;
+        }
+        
+        .header{
+            background-image: url("lcrm_homepage_header.jpg");
+            background-position: -300px 500px; 
+            width: 100%;
+
+        }
+        
+        .buttons{
+            padding-top: 0px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+        }
+		
+		.welcomeh3{
+			margin: 20px;
+		}
+        
+        #welcome{
+        	padding: 20px;
+        }
+    </style>
+
+
+</body></html>
